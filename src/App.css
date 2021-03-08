@@ -2,6 +2,11 @@
   color: aliceblue;
 }
 
+button {
+  background-color: rgb(109, 109, 109);
+  
+}
+
 #mainHeading {
   font-size: 3rem;
 }
@@ -29,4 +34,6 @@ body {
 #artistSearch {
   max-width: 200px;
   font-size: 2rem;
+  border-radius: .5rem;
+  color: rgb(63, 63, 63);
 }

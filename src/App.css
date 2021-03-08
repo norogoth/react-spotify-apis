@@ -31,7 +31,7 @@ body {
   margin-right: auto;
 }
 
-#artistSearch {
+#searchBox {
   max-width: 200px;
   font-size: 2rem;
   border-radius: .5rem;

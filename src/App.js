@@ -14,24 +14,29 @@ function App() {
   }
 
   async function handleClick() {
-    let promise = await fetch(url, {
+    let searchString = document.getElementById("searchBox").value;
+    let response = await fetch(url + "?q=" + searchString + "&type=artist", {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-
-    if (promise.ok) {
-      let json = await promise.json();
+    // let data = await response.json();
+    // console.log(response.status);
+    // console.log(data);
+    if (response.ok) {
+      let json = await response.json();
+      console.log(json);
+      console.log(json.);
     } else {
-      console.log(promise);
-      alert(`HTTP Error: ${promise.status}`);
+      console.log(response);
+      alert(`HTTP Error: ${response.status}`);
     }
   }
 
   return (
     <div id="mainContainer">
       <h id="mainHeading">Get an Artist's Albums</h>
-      <input id="artistSearch"></input>
+      <input id="searchBox"></input>
       <button onClick={handleClick}>search</button>
       <ul id="albumList">{albumList}</ul>
     </div>

@@ -2,35 +2,44 @@ import './App.css';
 import React, {useState} from 'react';
 import reactDom from 'react-dom';
 
-const token = "BQB2j85HfD91v4tKyd3CfuLyRt5WyqnqLLndDBwmpYRbCRRCcMxWOxQ_wr4AFXXwnVtT5NaIKdv59cSllRl3M4kc7ow9dfn-caH1xqSXVv97COzWceqys13a99rm6XfDhqasQuqnAdyv";
-const url = "https://api.spotify.com/v1/search";
+const clientId = "6cb2e9a6a5d24292a94d3a07f2c9ad2b";
+const clientSecret = "3df8daacffae4150a202a52aa9b95f8f";
+const tokenUrl = "https://accounts.spotify.com/api/token";
+const searchUrl = "https://api.spotify.com/v1/search";
+let token = "null";
+
 
 function App() {
   const [albumList, setAlbumList] = useState([]);
  
-  function search(searchString) {
-    console.log("search was called");
-    //run API
+  async function handleClick() {
+
   }
 
-  async function handleClick() {
-    let searchString = document.getElementById("searchBox").value;
-    let response = await fetch(url + "?q=" + searchString + "&type=artist", {
+  function getToken() {
+    fetch(tokenUrl, {
+      method: 'POST',
+      body: 'grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + clientSecret,
       headers: {
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
+    }).then(function (response) {
+        return response.json();
+    }).then (function (data) {
+        token = data;
+        console.log("Token: ", token);
     });
-    // let data = await response.json();
-    // console.log(response.status);
-    // console.log(data);
-    if (response.ok) {
-      let json = await response.json();
-      console.log(json);
-      console.log(json.);
-    } else {
-      console.log(response);
-      alert(`HTTP Error: ${response.status}`);
-    }
+  }
+
+  function searchApi() {
+    const searchBox = window.document.getElementById("searchBox");
+    const searchString = searchBox.value;
+
+  }
+
+  function testClick() {
+    getToken();
+    searchApi();
   }
 
   return (
@@ -38,9 +47,9 @@ function App() {
       <h id="mainHeading">Get an Artist's Albums</h>
       <input id="searchBox"></input>
       <button onClick={handleClick}>search</button>
+      <button onClick={testClick}>test</button>
       <ul id="albumList">{albumList}</ul>
     </div>
-
   );
 }
 

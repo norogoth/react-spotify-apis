@@ -13,7 +13,7 @@ function App() {
   const [albumList, setAlbumList] = useState([]);
  
   async function handleClick() {
-
+    console.log("just compile pls");
   }
 
   function getToken() {
@@ -29,17 +29,27 @@ function App() {
         token = data;
         console.log("Token: ", token);
     });
+    return token;
   }
 
   function searchApi() {
     const searchBox = window.document.getElementById("searchBox");
     const searchString = searchBox.value;
 
+    fetch(searchUrl + "?q=" + searchString + "&type=artist", {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(function (response){
+      return response.json();
+    }).then(function (data){
+      console.log(data);
+    })
   }
 
   function testClick() {
-    getToken();
-    searchApi();
+    getToken()
+    .then(() => searchApi())
   }
 
   return (

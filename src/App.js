@@ -16,20 +16,19 @@ function App() {
     console.log("just compile pls");
   }
 
-  function getToken() {
-    fetch(tokenUrl, {
-      method: 'POST',
-      body: 'grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + clientSecret,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }).then(function (response) {
-        return response.json();
-    }).then (function (data) {
-        token = data;
-        console.log("Token: ", token);
-    });
-    return token;
+  async function getToken() {
+      return fetch(tokenUrl, {
+        method: 'POST',
+        body: 'grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + clientSecret,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(function (response) {
+          return response.json();
+      }).then (function (data) {
+          token = data;
+          console.log("Token: ", token);
+      });
   }
 
   function searchApi() {

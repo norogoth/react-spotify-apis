@@ -18,23 +18,7 @@ function Muffins() {
     }).then(function (response) {
       return response.json();
     }).then (function (data) {
-      //console.log("data: ",data["data"]);
-      let newMuffinList = [];
-      for (const [key, value] of Object.entries(data["data"])){
-        //console.log("*",value);
-        const row = document.createElement('tr');
-        const name = document.createElement('td');
-        name.innerHTML = data["data"]["name"];
-        const desc = document.createElement('td');
-        desc.innerHTML = data["data"]["description"];
-        row.appendChild(name);
-        row.appendChild(desc);
-        newMuffinList.push(row);
-      }
-      setMuffinList(newMuffinList);
-      console.log("muffinlist",muffinList);
-      return data["data"];
-
+      setMuffinList(data["data"]);
     });
   }
 

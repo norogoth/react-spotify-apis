@@ -34,6 +34,7 @@ function Muffins() {
       setMuffinList(newMuffinList);
       console.log("muffinlist",muffinList);
       return data["data"];
+
     });
   }
 
